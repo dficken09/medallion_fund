@@ -1,0 +1,10 @@
+name: data_grabber
+title:
+username:
+account: drewficken-medallion-fund
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1243183
+bundleId: 2444828
+url: https://drewficken-medallion-fund.shinyapps.io/data_grabber/
+when: 1569435245.98044
