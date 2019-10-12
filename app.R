@@ -1,6 +1,6 @@
 library(shiny)
 library(shinythemes)
-library(TTR)
+#library(TTR)
 library(xtable)
 library(compiler)
 library(reshape)
@@ -8,7 +8,7 @@ library(plyr)
 library(chron)
 library(ggplot2)
 library(quantmod)
-library(rvest)
+#library(rvest)
 library(data.table)
 library(finreportr)
 library(dqshiny)
@@ -28,7 +28,7 @@ source("returns_wrangler.R")
 source("sector_analyzer.R")
 source("alpha_calculator.R")
 
-sp_dt = readRDS("sp_dt")
+#sp_dt = readRDS("sp_dt")
 sp_list = readRDS("sp_list")
 stock_db = readRDS("stock_db")
 sector_sums = readRDS("sector_sums")
@@ -39,9 +39,11 @@ title="S&P 500"
 
 ticker_options = sort(names(sp_list))
 
-min_date = sp_dt$Date[1]
+#min_date = sp_dt$Date[1]
+min_date = sp_list$MMM[[2]]$Date[1]
 
-max_date = sp_dt$Date[nrow(sp_dt)]
+#max_date = sp_dt$Date[nrow(sp_dt)]
+max_date = sp_list$MMM[[2]]$Date[nrow(sp_list$MMM[[2]])]
 
 start_date_v1 = as.POSIXlt(max_date)
 start_date_v1$year=start_date_v1$year-1

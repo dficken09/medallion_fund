@@ -1,4 +1,4 @@
-setwd("~/Google Drive/Medallion Fund/data_grabber")
+#setwd("~/Google Drive/Medallion Fund/data_grabber")
 
 # This is my first attempt to grab all of the data for the current S&P 500 companies 
 # In order to do so we will use "quantmod package" - and we will store the data in .csv files
@@ -57,7 +57,7 @@ for (i in symbol_list){
   sp_dt<-merge(sp_dt,temp_v2, by = "Date", all.x = T)
 }
 
-saveRDS(sp_dt, "sp_dt")
+#saveRDS(sp_dt, "sp_dt")
 
 
 ### turn into list of lists, titled by the ticker name

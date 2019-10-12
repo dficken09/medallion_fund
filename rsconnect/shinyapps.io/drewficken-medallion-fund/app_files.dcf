@@ -1,0 +1,10 @@
+name: app_files
+title:
+username:
+account: drewficken-medallion-fund
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1321060
+bundleId:
+url: https://drewficken-medallion-fund.shinyapps.io/app_files/
+when: 1570899696.36141

@@ -11,6 +11,8 @@ french_data_start <- read.table("F-F_Research_Data_5_Factors_2x3.txt",
                    skip=3, blank.lines.skip = T, header=TRUE, fill = T)
 
 
+file.remove("F-F_Research_Data_5_Factors_2x3.txt")
+
 french_data = french_data_start[c(1:(which(row.names(french_data_start)=="Annual")-1)),]
 
 latest_month = row.names(french_data)[nrow(french_data)]
