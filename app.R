@@ -1,6 +1,6 @@
 library(shiny)
 library(shinythemes)
-#library(TTR)
+library(TTR)
 library(xtable)
 library(compiler)
 library(reshape)
@@ -8,15 +8,15 @@ library(plyr)
 library(chron)
 library(ggplot2)
 library(quantmod)
-#library(rvest)
+library(rvest)
 library(data.table)
 library(finreportr)
 library(dqshiny)
-library(DT)
 library(XML)
 library(gsubfn)
 library(dplyr)
 library(gplots)
+library(DT)
 
 #setwd("C:/Users/206582739/Dropbox (NBCUniversal)/Drew Personal/Shiny/JWA")
 #setwd("~/Google Drive/Medallion Fund/data_grabber")
@@ -57,12 +57,12 @@ ui<-navbarPage(
   ###########################################################################################################################
   tabPanel("Overview",
       fluidRow(
-        column(2),
-        column(8,
+        column(1),
+        column(10,
                wellPanel(
                  h1("General"),
-                 h5(""),
-                 h5("The purpose of this 'website' is two-fold. First, I wanted to build an app in which I could dive
+                 h4(""),
+                 h4("The purpose of this 'website' is two-fold. First, I wanted to build an app in which I could dive
                     deeper into stock performance as a way of being a smarter investor once I've actually accumulated some
                     personal wealth, leading to data-driven decisions rather than reading some MarketWatch articles 
                     and just throwing money into something that sounds good. Second, I wanted to use this as a way to 'advertise' 
@@ -76,24 +76,24 @@ ui<-navbarPage(
                     and presentation. It can standalone with minimal upkeep, which means I can work on it when I have free time and ignore it
                     when I don't. If you're a friend or family member, I hope you find the site useful and interesting. If you're an employer, 
                     please hire me!"),
-                 h5(""),
+                 h4(""),
                  tags$hr(style="border-color: yellow;"),
                  h1("Stock Analysis"),
-                 h5(""),
+                 h4(""),
                  h3("Invidividual Stock"),
-                 h5("Look up individual company information such as company headquarters, P/E, shares outstanding,
+                 h4("Look up individual company information such as company headquarters, P/E, shares outstanding,
                     etc. Also shows the stock price over a given timeframe. All stocks listed in the S&P 500 are 
                     available for analysis."),
-                 h5(""),
+                 h4(""),
                  h3("Comparison"),
-                 h5("This tab allows you to do side-by-side comparisons of individual stocks."),
-                 h5(""),
+                 h4("This tab allows you to do side-by-side comparisons of individual stocks."),
+                 h4(""),
                  h3("Sector Analysis"),
-                 h5("This tab allows you to compare the 11 different sectors of the S&P 500 to each other, aggregated by sum, average, or 
+                 h4("This tab allows you to compare the 11 different sectors of the S&P 500 to each other, aggregated by sum, average, or 
                     weighted average where weight is represented by a company's market cap."),
-                 h5(""),
+                 h4(""),
                  h3("Alpha"),
-                 h5("This tab displays the Alpha and Beta values of individual stocks, displayed one sector at a time. For the layman, 
+                 h4("This tab displays the Alpha and Beta values of individual stocks, displayed one sector at a time. For the layman, 
                     a stock's 'Beta' is a historical measure of volatility. Beta measures how a stock or portfolio moves relative to a 
                     benchmark or index like the S&P 500. A Beta = 1.0 means the stock moves in lockstep with the index. A Beta of 2.0 means the stock moves
                     twice as much as the benchmark, and because it's twice as volatile, the stock is twice as risky and therefore, to be compensated 
@@ -103,14 +103,16 @@ ui<-navbarPage(
                     is 7%-4.5% or 2.5%. If the stock were to only actually return 3%, its alpha would be -1.5%.
                     When it comes to creating a portfolio, managers are seeking out high alphas rather than high returns because this actually takes
                     risk into account. This is where Bridgewater's flagship fund 'Pure Alpha Fund' gets its name, as well as the website 'Seeking Alpha'."),
-                 h5(""),
-                 h5("On this tab you can select one of three models: Capital Asset Pricing Model (CAPM), Fama and French's 3 Factor Model, or 
+                 h4(""),
+                 h4("On this tab you can select one of three models: Capital Asset Pricing Model (CAPM), Fama and French's 3 Factor Model, or 
                     Fama and French's 5 Factor Model."),
+                 h4(""),
                  tags$li("CAPM: The capital asset pricing model helps to calculate investment risk and what return on investment an investor should expect.
                          It consists of two components, alpha and beta. The general equation for the CAPM model is: stock_rf ~ stock_beta*mkt_rf + alpha, 
                          where stock_rf is the stock return minus the risk free rate and mkt_rf is the index return minus the risk free rate. 
                          For more details click on the investopedia link below."),
                  uiOutput("CAPM_link"),
+                 h4(""),
                  tags$li("Three Factor: This model was developed by French and Fama, two nobel laureates from the University of Chicago (no big deal) as a way to 
                          also factor in value risk as well as size risk on top of the CAPM model. These professors found through research that value stocks typically
                          outperform growth stocks when accounting for market risk. Similarly, they found that small-cap stocks also typically outperform large-cap stocks.
@@ -118,6 +120,7 @@ ui<-navbarPage(
                          characteristics included. The general equation for the Three factor model is: stock_rf ~ stock_beta*mkt_rf + hml_beta*HML + smb_beta*SMB + alpha. 
                          For more information, click the investopedia link below."),
                  uiOutput("Three_Fact_link"),
+                 h4(""),
                  tags$li("Five Factor: Same as Three Factor model, but with two additional factors: RMW and CMA. The new model adds the concept that companies reporting 
                          higher future earnings have higher returns in the stock market, a factor referred to as profitability. The fifth factor, referred to as investment, 
                          relates the concept of internal investment and returns, suggesting that companies directing profit towards major growth projects are likely to 
@@ -126,50 +129,55 @@ ui<-navbarPage(
                          investment portfolios minus the average return on the two aggressive investment portfolios. The general equation for the Five factor model is: 
                          stock_rf ~ stock_beta*mkt_rf + hml_beta*HML + smb_beta*SMB + rmw_beta*RMW + cma_beta*CMA + alpha. For more information, click the French data link below."),
                  uiOutput("Five_Fact_link"),
+                 h4(""),
                  tags$hr(style="border-color: yellow;"),
                  h1("Bio"),
-                 h5(""),
+                 h4(""),
                  h3("Background"),
-                 h5(""),
-                 h5("My name is Drew Ficken. I grew up in Northwest Indiana, and went to Purdue University where I majored in Mechanical Engineering. 
+                 h4(""),
+                 h4("My name is Drew Ficken. I grew up in Northwest Indiana, and went to Purdue University where I majored in Mechanical Engineering. 
                     While there I interned for Rolls-Royce for two summers - the first I worked on Navy Ship propellers, the second I worked on the 
                     F-35 lift fan system (the fan's thrust allows the jet to take off and land vertically). After graduating I joined a proprietary trading
                     firm called Andrie Trading, where I managed the company's gold options portfolio. We used algorithmic-based trading software to execute 
                     trades as efficiently as possible, relying on analytics tools we developed in house (using Shiny apps like this one) to create signals as
                     to when to put on and take off risk, looking to identify inefficiencies within the market microstructure that we could profit off of. 
                     After 3 years at this firm, I enrolled in the University of Chicago's dual degree MBA/MPCS program. I took as many data science 
-                    classes as possible, knowing that I wanted to be working directly with data after graudating. For my internship last summer, 
+                    classes as possible, knowing that I wanted to be working directly with data after graduating. For my internship last summer, 
                     I worked for NBCUniversal's Mobile Games Publishing team, where I built out dashboards and predictive analytics tools to help the 
                     PMs and User Acquisition team make better decisions, as well as have a better grasp for how their mobile games had been performing.
                     I graduated in June and since then have been looking for a job in analytics in Chicago. I developed this app in order to get some
                     traction with companies, hoping to provide some transparency into what I'm capable of, something that a resume simply can't accomplish."),
-                 h5(""),
+                 h4(""),
                  h3("Past Projects"),
-                 h5(""),
-                 h5("These are some of the data science assignments I worked on while at Booth. I've included these to show that we didn't just learn some top level
+                 h4(""),
+                 h4("These are some of the data science assignments I worked on while at Booth. I've included these to show that we didn't just learn some top level
                     data science theories, but actually wrote code and tested models on real world data. While some of the projects include multiple students' names,
                     I only included the projects in which I was fully responsible for the entire codebase. These aren't meant to be fully grasped. Instead, they are 
                     supposed to give you an idea of some of the analytics topics I've covered in my two years at Booth, and show that I can dig down into the details
                     of a complex program and come up with a data-driven solution to a business problem."),
                  h3("Resume"),
-                 h5(""),
+                 h4(""),
                  tags$embed(style="height:800px; width:100%; scrolling=yes",
                             src="Drew_Ficken_Resume_0819.pdf#toolbar=0"),
                  h3("App Info"),
-                 h5(""),
-                 h5("This app was created using RStudio along with an R package called 'Shiny', which makes it easy to build interactive web apps straight  
+                 h4(""),
+                 h4("This app was created using RStudio along with an R package called 'Shiny', which makes it easy to build interactive web apps straight  
                     from R. I built this app from scratch, using a couple of web scraper examples from stackoverflow and R-bloggers in order to grab data from
                     websites. You can look at my github site for the exact code I used to pull in and format the data for the site. I never used a .csv file 
                     because I want to continue grabbing updated information solely by running the app. That being said, some of the data takes some time 
                     to extract and therefore I will only update some of the data (Market Cap, P/E, etc.) once a month. If you'd like to collaborate with me on some
                     ideas or the coding, just send me an email to the address listed in my resume. I would love some help."),
-                 h5(""),
+                 h4(""),
                  h3("Github Site"),
-                 h5(""),
-                 h5("")
+                 h4(""),
+                 uiOutput("git_link"),
+                 h4(""),
+                 h4(""),
+                 h4("")
+                 
                )
       ),
-      column(2)
+      column(1)
   )),
   ###########################################################################################################################
   ###########################################################################################################################
@@ -194,7 +202,7 @@ ui<-navbarPage(
           ),
           column(5,
                  plotOutput("stock_plot"),
-                 tableOutput("stock_table")
+                 shiny::dataTableOutput("stock_table")
               )
          )
   ),
@@ -231,7 +239,7 @@ ui<-navbarPage(
   )),
   ###########################################################################################################################
   ###########################################################################################################################
-  tabPanel("Sector",
+  tabPanel("Sector Analysis",
           fluidRow(
             column(6,
                 wellPanel(
@@ -311,7 +319,7 @@ ui<-navbarPage(
            tabsetPanel(type = "tabs",
               tabPanel("Targeting based on Heterogeneous Treatment Effects",
                     h1(""),
-                    h5("Given customer-level data from an appliance store, developed a target audience for a mailing 
+                    h4("Given customer-level data from an appliance store, developed a target audience for a mailing 
                        campaign that targets people based on how effective receiving a catalog would be for the individual. 
                        Used this campaign to predict the profits that result from this mailer getting sent to individuals. 
                        Used OLS, LASSO, elastic net and causal forest regression models to predict treatment effects."),
@@ -319,7 +327,7 @@ ui<-navbarPage(
                                 src="Heterogeneous_Targeting_Effects.pdf#toolbar=0")),
               tabPanel("Analyze Household Purchasing Characteristics Over Time",
                     h1(""),
-                    h5("Given panel data for more than 60,000 households, looked at beverage consumption patterns by households from 2004 to 2014.
+                    h4("Given panel data for more than 60,000 households, looked at beverage consumption patterns by households from 2004 to 2014.
                        Specifically looked at carbonated sodas, carbonated diet sodas, and water consumption throughout this time period, as well as 
                        conducted brand analysis on different companies that sell water. Identified industry-wide patterns as well as competitive 
                        trends within the marketplace"),
@@ -327,21 +335,21 @@ ui<-navbarPage(
                               src="Household_Consumption_Patterns.pdf#toolbar=0")),
               tabPanel("Estimate Own and Competitive Brand-Level Advertising Effects",
                        h1(""),
-                       h5("Given store-level data for antacid sales, looked at the effects of own & competitor pricing as well as 
+                       h4("Given store-level data for antacid sales, looked at the effects of own & competitor pricing as well as 
                        brand advertising to predict the demand for a specific brand of antacid in a given store while taking into 
                        account time effects."),
                        tags$embed(style="height:800px; width:100%; scrolling=yes",
                                   src="Own_Comp_Adv_Effects.pdf#toolbar=0")),
               tabPanel("Understand Potential Market Share for Different TV Subscription Plans",
                        h1(""),
-                       h5("Given a conjoint analysis survey for various TV subscription packages, generated a demand curve
+                       h4("Given a conjoint analysis survey for various TV subscription packages, generated a demand curve
                           for 3 different subscription plans that allowed us to understand market share and ideal price points
                           for the different plans."),
                        tags$embed(style="height:800px; width:100%; scrolling=yes",
                                   src="Willingness_to_Pay.pdf#toolbar=0")),
               tabPanel("Understanding Reasons for Conversion (Attribution)",
                        h1(""),
-                       h5("Given customer-level data, generated a model to understand the path a customer takes to arrive at
+                       h4("Given customer-level data, generated a model to understand the path a customer takes to arrive at
                           a conversion. Broke out the different acquisition channels in terms of the effect they have on a 
                           customer converting."),
                        tags$embed(style="height:800px; width:100%; scrolling=yes",
@@ -377,6 +385,11 @@ server<-function(input,output,session) {
   five_f_url <- a("French Data - Five Factor Model", href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_5_factors_2x3.html")
   output$Five_Fact_link <- renderUI({
     tagList("URL link:", five_f_url)
+  })
+  
+  git_url <- a("Github Repository - Medallion Fund App", href="https://github.com/dficken09/medallion_fund")
+  output$git_link <- renderUI({
+    tagList("URL link:", git_url)
   })
   
 ########################################################################################################
@@ -475,7 +488,7 @@ server<-function(input,output,session) {
   
   ####################################################################################################
   
-  output$stock_table <- renderTable({
+  output$stock_table <- shiny::renderDataTable({
     stock_table<- stock_table()
     stock_table
   })
