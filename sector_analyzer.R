@@ -8,7 +8,7 @@ stock_db = readRDS("stock_db")
 sector_db=data.frame()
 
 for (i in 1:length(sp_list)){
-  temp= cbind.data.frame(sp_list[[i]][[1]]$Symbol,sp_list[[i]][[1]]$`GICS Sector`,sp_list[[i]][[1]]$`GICS Sub Industry`)
+  temp = cbind.data.frame(sp_list[[i]][[1]]$Symbol,sp_list[[i]][[1]]$`GICS Sector`,sp_list[[i]][[1]]$`GICS Sub Industry`)
   colnames(temp)=c("Symbol","Sector","SubSector")
   sector_db = rbind.data.frame(sector_db,temp)
 }

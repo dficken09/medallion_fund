@@ -81,13 +81,32 @@ saveRDS(sp_list, "sp_list")
 ### get all of the stock info in 1 large dataframe
 stock_db = data.frame()
 for (i in symbol_list){
+  if (i != "BKR"){
   temp = get_stock_data(i)
   stock_db=rbind.data.frame(stock_db, temp)
+  }else{
+  temp = get_stock_data("BHGE")
+  stock_db=rbind.data.frame(stock_db, temp)
+  }
 }
+
+
+row_n <- row.names(stock_db)
+
+stock_db = data.frame(lapply(stock_db, as.character), stringsAsFactors = F)
+row.names(stock_db)<-row_n
+
+### Change Column Names "Market.Cap" and "Avg.Volume" to "Market Cap" and "Avg Volume", respectively
+colnames(stock_db)<-gsub("Market.Cap", "Market Cap", colnames(stock_db))
+colnames(stock_db)<-gsub("Avg.Volume", "Avg Volume", colnames(stock_db))
+
+### Change Column Names "Book.sh" and "P.E" to "Book/sh" and "P/E", respectively
+colnames(stock_db)<-gsub("Book.sh", "Book/sh", colnames(stock_db))
+colnames(stock_db)<-gsub("P.E", "P/E", colnames(stock_db))
 
 saveRDS(stock_db,"stock_db")
 
-# stock_db_list=list()
+ # stock_db_list=list()
 # stock_db_list[[as.character(Sys.Date())]]=stock_db
 
 
