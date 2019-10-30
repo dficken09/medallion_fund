@@ -5,6 +5,6 @@ account: drewficken-medallion-fund
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1321060
-bundleId: 2502694
+bundleId: 2552851
 url: https://drewficken-medallion-fund.shinyapps.io/app_files/
-when: 1571161937.48057
+when: 1572479555.55244

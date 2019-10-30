@@ -81,13 +81,8 @@ saveRDS(sp_list, "sp_list")
 ### get all of the stock info in 1 large dataframe
 stock_db = data.frame()
 for (i in symbol_list){
-  if (i != "BKR"){
   temp = get_stock_data(i)
   stock_db=rbind.data.frame(stock_db, temp)
-  }else{
-  temp = get_stock_data("BHGE")
-  stock_db=rbind.data.frame(stock_db, temp)
-  }
 }
 
 
