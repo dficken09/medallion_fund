@@ -83,6 +83,7 @@ stock_db = data.frame()
 for (i in symbol_list){
   temp = get_stock_data(i)
   stock_db=rbind.data.frame(stock_db, temp)
+  #print(i)
 }
 
 
